@@ -1,0 +1,12 @@
+name: Chunks
+main: com.jordna.chunks.main.Chunks
+author: Jordna
+version: 0.0.8
+api-version: 1.13
+description: Chunks game world
+
+commands:
+    chunks:
+        description: Create a chunk for a player
+    c:
+        description: Create a chunk for a player

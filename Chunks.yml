@@ -1,0 +1,20 @@
+chunks:
+    block-chances:
+        stone: 250
+        iron_ore: 20
+        coal_ore: 20
+        lapis_ore: 4
+        redstone_ore: 6
+        gold_ore: 3
+        diamond_ore: 2
+        emerald_ore: 1
+        sand: 5
+        gravel: 25
+        andesite: 25
+        diorite: 25
+        granite: 25
+        chest: 0.5
+    difficulty-multipliers:
+        easy: 1
+        medium: 2
+        hard: 3

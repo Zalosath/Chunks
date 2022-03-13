@@ -15,56 +15,59 @@ import net.md_5.bungee.api.ChatColor;
 public class SignListeners implements Listener
 {
 
-	private Chunks chunks;
-	public SignListeners(Chunks chunks)
+    private Chunks chunks;
+
+    public SignListeners(Chunks chunks)
+    {
+	this.chunks = chunks;
+    }
+
+    @EventHandler
+    public void onSignChange(SignChangeEvent e)
+    {
+	if (e.getLine(0).equalsIgnoreCase("[Chunks]"))
 	{
-		this.chunks = chunks;
-	}
-	
-	@EventHandler
-	public void onSignChange(SignChangeEvent e)
-	{
-		if (e.getLine(0).equalsIgnoreCase("[Chunks]"))
+	    if (e.getPlayer().isOp())
+	    {
+		if (e.getLine(1).equalsIgnoreCase("Open"))
 		{
-			if (e.getPlayer().isOp())
-			{
-				if (e.getLine(1).equalsIgnoreCase("Open"))
-				{
-					e.setLine(0, ChatColor.BLACK + "[Chunks]");
-					e.setLine(1, ChatColor.BLUE + "Open");
-					e.getPlayer().sendMessage(ChatColor.BLUE + "[Chunks] Sign created");
-				}
-			}
+		    e.setLine(0, ChatColor.BLACK + "[Chunks]");
+		    e.setLine(1, ChatColor.BLUE + "Open");
+		    e.getPlayer().sendMessage(ChatColor.BLUE + "[Chunks] Sign created");
 		}
+	    }
 	}
-	
-	@EventHandler
-	public void onInteract(PlayerInteractEvent e)
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e)
+    {
+	if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
 	{
-		if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
+	    if (e.hasBlock())
+	    {
+		if (e.getClickedBlock().getType() == Material.OAK_SIGN
+			|| e.getClickedBlock().getType() == Material.OAK_WALL_SIGN)
 		{
-			if (e.hasBlock())
+		    Sign s = (Sign) e.getClickedBlock().getState();
+		    if (ChatColor.stripColor(s.getLine(0)).equalsIgnoreCase("[Chunks]"))
+		    {
+			if (ChatColor.stripColor(s.getLine(1)).equalsIgnoreCase("Open"))
 			{
-				if (e.getClickedBlock().getType() == Material.OAK_SIGN || e.getClickedBlock().getType() == Material.OAK_WALL_SIGN)
-				{
-					Sign s = (Sign) e.getClickedBlock().getState();
-					if (ChatColor.stripColor(s.getLine(0)).equalsIgnoreCase("[Chunks]"))
-					{
-						if (ChatColor.stripColor(s.getLine(1)).equalsIgnoreCase("Open"))
-						{
-							if (e.getPlayer().hasPermission("chunks.commands.c.use"))
-							{
-								chunks.getMenu().openInventory(e.getPlayer());
-							}
-							else
-							{
-								e.getPlayer().sendMessage(ChatColor.RED + "[Chunks] You don't have permission to do that");
-							}
-						}
-					}
-				}
+			    if (e.getPlayer().hasPermission("chunks.commands.c.use"))
+			    {
+				chunks.getMenu().openInventory(e.getPlayer());
+			    }
+			    else
+			    {
+				e.getPlayer()
+					.sendMessage(ChatColor.RED + "[Chunks] You don't have permission to do that");
+			    }
 			}
+		    }
 		}
+	    }
 	}
-	
+    }
+
 }

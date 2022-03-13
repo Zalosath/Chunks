@@ -11,41 +11,42 @@ import com.jordna.chunks.main.Chunks;
 public class PlayerProtectionEvents implements Listener
 {
 
-	private Chunks main;
-	public PlayerProtectionEvents(Chunks ins)
+    private Chunks main;
+
+    public PlayerProtectionEvents(Chunks ins)
+    {
+	this.main = ins;
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent e)
+    {
+
+	if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getBlock().getLocation()))
 	{
-		this.main = ins;
+	    e.setCancelled(true);
 	}
-	
-	@EventHandler
-	public void onBreak(BlockBreakEvent e)
+
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e)
+    {
+	if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getPlayer().getLocation()))
 	{
-		
-		if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getBlock().getLocation()))
-		{
-			e.setCancelled(true);
-		}
-		
+	    e.setCancelled(true);
 	}
-	
-	@EventHandler
-	public void onInteract(PlayerInteractEvent e)
+    }
+
+    @EventHandler
+    public void onPlace(BlockPlaceEvent e)
+    {
+
+	if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getBlock().getLocation()))
 	{
-		if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getPlayer().getLocation()))
-		{
-			e.setCancelled(true);
-		}
+	    e.setCancelled(true);
 	}
-	
-	@EventHandler
-	public void onPlace(BlockPlaceEvent e)
-	{
-		
-		if (!main.getProtectionManager().canDoHere(e.getPlayer(), e.getBlock().getLocation()))
-		{
-			e.setCancelled(true);
-		}
-		
-	}
-	
+
+    }
+
 }

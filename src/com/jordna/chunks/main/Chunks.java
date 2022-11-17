@@ -141,20 +141,20 @@ public class Chunks extends JavaPlugin
 	this.chunkFile = new File(this.getDataFolder(), "Chunks.yml");
 	this.chunk = YamlConfiguration.loadConfiguration(this.chunkFile);
 
-	this.addBlock(Material.STONE, 250, 100, 0);
-	this.addBlock(Material.IRON_ORE, 20, 100, 0);
-	this.addBlock(Material.COAL_ORE, 20, 100, 0);
-	this.addBlock(Material.LAPIS_ORE, 4, 25, 0);
-	this.addBlock(Material.REDSTONE_ORE, 6, 25, 0);
-	this.addBlock(Material.GOLD_ORE, 5, 20, 0);
-	this.addBlock(Material.DIAMOND_ORE, 3, 12, 0);
-	this.addBlock(Material.EMERALD_ORE, 1, 15, 0);
-	this.addBlock(Material.SAND, 5, 100, 0);
-	this.addBlock(Material.GRAVEL, 25, 100, 0);
-	this.addBlock(Material.ANDESITE, 25, 100, 0);
-	this.addBlock(Material.DIORITE, 25, 100, 0);
-	this.addBlock(Material.GRANITE, 25, 100, 0);
-	this.addBlock(Material.CHEST, 0.5f, 100, 0);
+	this.addBlock(Material.STONE, 250, 100, -64);
+	this.addBlock(Material.IRON_ORE, 20, 100, -64);
+	this.addBlock(Material.COAL_ORE, 20, 100, -64);
+	this.addBlock(Material.LAPIS_ORE, 4, 25, -64);
+	this.addBlock(Material.REDSTONE_ORE, 6, 25, -64);
+	this.addBlock(Material.GOLD_ORE, 5, 20, -64);
+	this.addBlock(Material.DIAMOND_ORE, 3, 12, -64);
+	this.addBlock(Material.EMERALD_ORE, 1, 15, -64);
+	this.addBlock(Material.SAND, 5, 100, -64);
+	this.addBlock(Material.GRAVEL, 25, 100, -64);
+	this.addBlock(Material.ANDESITE, 25, 100, -64);
+	this.addBlock(Material.DIORITE, 25, 100, -64);
+	this.addBlock(Material.GRANITE, 25, 100, -64);
+	this.addBlock(Material.CHEST, 0.5f, 100, -64);
 
 	this.chunk.addDefault("chunks.difficulty-multipliers.easy", 1);
 	this.chunk.addDefault("chunks.difficulty-multipliers.medium", 2);

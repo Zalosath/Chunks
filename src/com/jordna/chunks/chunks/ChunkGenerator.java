@@ -88,7 +88,7 @@ public class ChunkGenerator
 		    for (int d = 0; d < 11; d++)
 		    {
 			HashMap<Integer, List<Item>> hash = new HashMap<Integer, List<Item>>();
-			for (int y = 0; y < 70; y++)
+			for (int y = -64; y < 70; y++)
 			{
 
 			    List<Item> itemLevels = new ArrayList<Item>();
@@ -242,7 +242,7 @@ public class ChunkGenerator
 	{
 	    for (int z = centreZ - chunkAllowance; z < centreZ + chunkAllowance; z++)
 	    {
-		for (int y = 0; y < 257; y++)
+		for (int y = -64; y < 257; y++)
 		{
 		    Block block = chunk.getHome().getWorld()
 			    .getBlockAt(new Location(chunk.getHome().getWorld(), x, y, z));
@@ -382,7 +382,7 @@ public class ChunkGenerator
 	{
 	    for (int z = this.c_Info.getBorderZ(); z < this.c_Info.getBorderZ() + 16; z++)
 	    {
-		for (int y = 0; y < 66; y++)
+		for (int y = -64; y < 66; y++)
 		{
 		    Material matToPlace = Material.STONE;
 
@@ -394,11 +394,11 @@ public class ChunkGenerator
 		    {
 			matToPlace = Material.DIRT;
 		    }
-		    else if (y > 1 && y < 62)
+		    else if (y > -64 && y < 62)
 		    {
 			matToPlace = this.returnRandomBlock(y);
 		    }
-		    else if (y == 0)
+		    else if (y == -64)
 		    {
 			matToPlace = Material.BEDROCK;
 		    }

@@ -1,7 +1,7 @@
 name: Chunks
 main: com.jordna.chunks.main.Chunks
 author: Jordna
-version: 0.0.8
+version: 0.0.9
 api-version: 1.13
 description: Chunks game world
 

@@ -1,6 +1,7 @@
 package com.jordna.chunks.chunks;
 
 import java.util.Deque;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -10,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.jordna.chunks.main.Chunks;
 
@@ -56,35 +58,32 @@ public class PastedBlock
 		    if (queue.isEmpty()) break;
 
 		    block = queue.poll();
-
+		    
 		    hasTime = System.currentTimeMillis() - start < main.getSettings()
 			    .getInt("chunks.lag-prevention.block-place-delay"); // 10 by default
 		    world.getBlockAt(block.x, block.y, block.z).setType(block.material);
 
 		    if (block.material == Material.CHEST)
 		    {
-			Chest c = (Chest) world.getBlockAt(block.x, block.y, block.z).getState();
-			for (ItemStack i : main.getChunkCreator().chestFill())
-			    c.getInventory().addItem(i);
+	        	Chest c = (Chest) world.getBlockAt(block.x, block.y, block.z).getState();
+	        	List<ItemStack> items = main.getChunkCreator().chestFill();
+	        	c.getInventory().setContents((ItemStack[]) items.toArray(new ItemStack[items.size()]));
+			world.getBlockAt(block.x, block.y, block.z).setBlockData(c.getBlockData());
 		    }
 
 		}
 
 		if (queue.isEmpty() && main.getChunkCreator().generating)
 		{
-
 		    main.getChunkCreator().finishGeneration(id);
 		    queueMap.remove(world);
-
 		}
 		else
 		{
 		    if (!main.getChunkCreator().generating && queue.isEmpty())
 		    {
-
 			main.getChunkCreator().finishAbandonment(id);
 			queueMap.remove(world);
-
 		    }
 		}
 
